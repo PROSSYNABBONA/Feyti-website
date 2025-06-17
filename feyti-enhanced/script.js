@@ -242,3 +242,230 @@ if (window.location.pathname.endsWith('about.html')) {
     document.head.appendChild(style);
     revealOnScroll('#vision-box, #mission-box, #market-box, #ai-journey-box, #milestones-box, #impact-box, #commitment-box');
 }
+
+// Newsletter page dynamic content
+if (window.location.pathname.endsWith('newsletter.html')) {
+  // Newsletter Archive
+  const archive = [
+    {title: 'May 2025: AI in Drug Safety', link: '#', summary: 'How AI is transforming pharmacovigilance.'},
+    {title: 'April 2025: Clinical Trials Trends', link: '#', summary: 'Latest trends in global clinical research.'},
+    {title: 'March 2025: Regulatory Updates', link: '#', summary: 'Key compliance changes for 2025.'}
+  ];
+  const archiveDiv = document.getElementById('newsletter-archive');
+  if (archiveDiv) {
+    archiveDiv.innerHTML = archive.map(a => `
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title text-success">${a.title}</h5>
+            <p class="card-text small">${a.summary}</p>
+            <a href="${a.link}" class="btn btn-outline-success btn-sm">Read</a>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+  // Featured Articles
+  const articles = [
+    {title: 'AI for Faster Trials', desc: 'How Feyti uses AI to accelerate clinical research.', link: '#'},
+    {title: 'Patient Safety First', desc: 'Best practices in adverse event reporting.', link: '#'}
+  ];
+  const articlesDiv = document.getElementById('featured-articles');
+  if (articlesDiv) {
+    articlesDiv.innerHTML = articles.map(a => `
+      <div class="col-md-6">
+        <div class="card h-100 border-success">
+          <div class="card-body">
+            <h5 class="card-title text-success">${a.title}</h5>
+            <p class="card-text">${a.desc}</p>
+            <a href="${a.link}" class="btn btn-success btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+  // Upcoming Events
+  const events = [
+    {date: 'July 2025', name: 'Feyti Webinar: AI in Compliance', desc: 'Join our experts for a live session.'},
+    {date: 'August 2025', name: 'Clinical Research Summit', desc: 'Meet us in Nairobi for Africa’s top research event.'}
+  ];
+  const eventsDiv = document.getElementById('upcoming-events');
+  if (eventsDiv) {
+    eventsDiv.innerHTML = events.map(e => `
+      <div class="col-md-6">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <div class="text-success fw-bold mb-2">${e.date}</div>
+            <h5 class="card-title">${e.name}</h5>
+            <p class="card-text">${e.desc}</p>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+  // Testimonials
+  const testimonials = [
+    {text: '“The Feyti newsletter keeps me updated on the latest in clinical research.”', author: '— Dr. Jane'},
+    {text: '“I love the practical tips and event invites!”', author: '— Mr. Okello'}
+  ];
+  const testDiv = document.getElementById('newsletter-testimonials');
+  if (testDiv) {
+    let idx = 0;
+    function showTestimonial(i) {
+      testDiv.innerHTML = `
+        <div class="col-md-8">
+          <div class="card border-success text-center shadow-sm fade-in">
+            <div class="card-body">
+              <p class="card-text">${testimonials[i].text}</p>
+              <h6 class="card-subtitle text-muted">${testimonials[i].author}</h6>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center gap-2 mt-2">
+            <button class="btn btn-outline-success btn-sm" id="test-prev">&larr;</button>
+            <button class="btn btn-outline-success btn-sm" id="test-next">&rarr;</button>
+          </div>
+        </div>
+      `;
+      setTimeout(() => testDiv.querySelector('.fade-in').classList.remove('fade-in'), 500);
+      testDiv.querySelector('#test-prev').onclick = () => showTestimonial((i-1+testimonials.length)%testimonials.length);
+      testDiv.querySelector('#test-next').onclick = () => showTestimonial((i+1)%testimonials.length);
+    }
+    showTestimonial(idx);
+  }
+  // Industry News
+  const news = [
+    {headline: 'WHO releases new PV guidelines', link: '#'},
+    {headline: 'AI adoption in clinical trials up 30%', link: '#'}
+  ];
+  const newsDiv = document.getElementById('industry-news');
+  if (newsDiv) {
+    newsDiv.innerHTML = news.map(n => `
+      <div class="col-md-6">
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-newspaper me-2" viewBox="0 0 16 16"><path d="M0 1.5A.5.5 0 0 1 .5 1h13a.5.5 0 0 1 .5.5V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V1.5zm1 .5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2H1zm2 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/></svg>
+          <div><a href="${n.link}" class="text-success fw-bold" target="_blank">${n.headline}</a></div>
+        </div>
+      </div>
+    `).join('');
+  }
+  // FAQ
+  const faqs = [
+    {q: 'How often is the newsletter sent?', a: 'Monthly, with occasional special editions.'},
+    {q: 'Can I unsubscribe anytime?', a: 'Yes, every email has an unsubscribe link.'}
+  ];
+  const faqDiv = document.getElementById('newsletter-faq');
+  if (faqDiv) {
+    faqDiv.innerHTML = faqs.map((f, i) => `
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faq${i}">
+          <button class="accordion-button${i>0?' collapsed':''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i}" aria-expanded="${i===0?'true':'false'}" aria-controls="collapse${i}">
+            ${f.q}
+          </button>
+        </h2>
+        <div id="collapse${i}" class="accordion-collapse collapse${i===0?' show':''}" aria-labelledby="faq${i}" data-bs-parent="#newsletter-faq">
+          <div class="accordion-body">${f.a}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+  // Social
+  const socials = [
+    {icon: 'facebook', link: 'https://www.facebook.com/Feyti256'},
+    {icon: 'linkedin', link: 'https://www.linkedin.com/company/feytimedicalgroup/'},
+    {icon: 'x', link: 'https://x.com/feytigroup'},
+    {icon: 'youtube', link: 'https://www.youtube.com/@FeytiMedicalGroup/videos'}
+  ];
+  const socialDiv = document.getElementById('newsletter-social');
+  if (socialDiv) {
+    socialDiv.innerHTML = socials.map(s => `
+      <a href="${s.link}" target="_blank" class="btn btn-outline-success d-flex align-items-center gap-2">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/${s.icon}.svg" alt="${s.icon}" width="24"> ${s.icon.charAt(0).toUpperCase()+s.icon.slice(1)}
+      </a>
+    `).join('');
+  }
+  // Poll
+  const pollDiv = document.getElementById('newsletter-poll');
+  if (pollDiv) {
+    pollDiv.innerHTML = `
+      <form id="poll-form">
+        <div class="mb-2">What topic would you like to see next?</div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pollOption" id="poll1" value="AI in Clinical Trials">
+          <label class="form-check-label" for="poll1">AI in Clinical Trials</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pollOption" id="poll2" value="Patient Safety">
+          <label class="form-check-label" for="poll2">Patient Safety</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pollOption" id="poll3" value="Regulatory Updates">
+          <label class="form-check-label" for="poll3">Regulatory Updates</label>
+        </div>
+        <button type="submit" class="btn btn-success btn-sm mt-2">Vote</button>
+        <div id="poll-result" class="mt-2"></div>
+      </form>
+    `;
+    const pollForm = document.getElementById('poll-form');
+    const pollResult = document.getElementById('poll-result');
+    if (pollForm) {
+      pollForm.onsubmit = function(e) {
+        e.preventDefault();
+        const val = pollForm.pollOption.value;
+        pollResult.innerHTML = `<div class='alert alert-success'>Thank you for voting for <b>${val}</b>!</div>`;
+        pollForm.querySelectorAll('input').forEach(inp => inp.disabled = true);
+        pollForm.querySelector('button').disabled = true;
+      };
+    }
+  }
+  // Modal logic for all info buttons
+  let modalDiv = document.getElementById('newsletter-modal');
+  if (!modalDiv) {
+    modalDiv = document.createElement('div');
+    modalDiv.innerHTML = `
+      <div class="modal fade" id="newsletter-modal" tabindex="-1" aria-labelledby="newsletterModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="newsletterModalLabel">More Info</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="newsletter-modal-body"></div>
+          </div>
+        </div>
+      </div>`;
+    document.body.appendChild(modalDiv);
+  }
+  const showModal = (title, body) => {
+    document.getElementById('newsletterModalLabel').textContent = title;
+    document.getElementById('newsletter-modal-body').innerHTML = body;
+    const modal = new bootstrap.Modal(document.getElementById('newsletter-modal'));
+    modal.show();
+  };
+  // Archive popups
+  if (archiveDiv) {
+    archiveDiv.querySelectorAll('.btn').forEach((btn, i) => {
+      btn.onclick = e => {
+        e.preventDefault();
+        showModal(archive[i].title, `<p>${archive[i].summary}</p><p>Full content coming soon.</p>`);
+      };
+    });
+  }
+  // Articles popups
+  if (articlesDiv) {
+    articlesDiv.querySelectorAll('.btn').forEach((btn, i) => {
+      btn.onclick = e => {
+        e.preventDefault();
+        showModal(articles[i].title, `<p>${articles[i].desc}</p><p>Full article coming soon.</p>`);
+      };
+    });
+  }
+  // Events popups
+  if (eventsDiv) {
+    eventsDiv.querySelectorAll('.card').forEach((card, i) => {
+      card.style.cursor = 'pointer';
+      card.onclick = e => {
+        showModal(events[i].name, `<div class='mb-2 text-success fw-bold'>${events[i].date}</div><p>${events[i].desc}</p>`);
+      };
+    });
+  }
+}
