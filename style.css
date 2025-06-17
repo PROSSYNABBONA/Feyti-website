@@ -1,0 +1,20 @@
+```css
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+.navbar-nav .nav-link {
+    font-size: 1.18rem;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+    transition: color 0.2s, background 0.2s;
+}
+
+.navbar-nav .nav-link.active, .navbar-nav .nav-link:hover {
+    color: #fff !important;
+    background: #157347;
+    border-radius: 0.5em;
+}
+```

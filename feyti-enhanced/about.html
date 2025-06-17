@@ -8,22 +8,37 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand fw-bold d-flex align-items-center" href="home.html">
-                <img src="images/Feyti Medical Group Logo-03 (1).jpg" alt="Feyti Logo" width="64" height="64" class="me-2" style="object-fit:contain; background:#fff; border-radius:8px;" />
-                Feyti Medical Group
-            </a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top flex-column p-0">
+        <div class="top-info-bar w-100 d-flex flex-wrap justify-content-between align-items-center px-3 py-2" style="gap:1em;">
+            <div class="d-flex align-items-center" style="gap:0.7em;">
+                <a class="navbar-brand fw-bold d-flex align-items-center mb-0 p-0" href="home.html" style="gap:0.5em;">
+                    <img src="images/Feyti Medical Group Logo-03 (1).jpg" alt="Feyti Logo" width="64" height="64" style="object-fit:contain; background:#fff; border-radius:8px;" />
+                    <span class="fs-3" style="letter-spacing:0.5px;">Feyti Medical Group</span>
+                </a>
+                <span class="location d-flex align-items-center ms-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#fff" viewBox="0 0 16 16" class="me-1"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                    <span>Located at Level 2, Plot 132, Spring Rd BugoIobi, Kampala Uganda</span>
+                </span>
+            </div>
+            <div class="social-icons d-flex align-items-center">
+                <a href="https://x.com/feytigroup" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X"></a>
+                <a href="https://www.facebook.com/Feyti256" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
+                <a href="https://www.linkedin.com/company/feytimedicalgroup/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn"></a>
+                <a href="https://www.instagram.com/feytimedcialgroup/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
+                <a href="https://www.youtube.com/@FeytiMedicalGroup/videos" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube"></a>
+            </div>
+        </div>
+        <div class="container-fluid justify-content-center">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="newsletter.html">Newsletter</a></li>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="home.html"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-house-door me-1" viewBox="0 0 16 16"><path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 2 7.5V14a1 1 0 0 0 1 1h3.5a.5.5 0 0 0 .5-.5V11a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v3.5a.5.5 0 0 0 .5.5H13a1 1 0 0 0 1-1V7.5a.5.5 0 0 0-.146-.354l-6-6z"/><path d="M13 2.5V6l-5-5-5 5V2.5a.5.5 0 0 1 1 0V6.293l4-4 4 4V2.5a.5.5 0 0 1 1 0z"/></svg>Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-briefcase me-1" viewBox="0 0 16 16"><path d="M6.5 0a.5.5 0 0 0-.5.5V2H2a2 2 0 0 0-2 2v1h16V4a2 2 0 0 0-2-2h-4V.5a.5.5 0 0 0-.5-.5h-3zm1 2V1h2v1h-2z"/><path d="M0 5v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5H0zm1 1h14v6a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6z"/></svg>Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-info-circle me-1" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 .877-.252 1.02-.797l.088-.416c.066-.308.118-.438.288-.469l.45-.083.082-.38-2.29-.287zm-1.812-2.29c-.282 0-.484.252-.484.533 0 .282.202.533.484.533.282 0 .484-.251.484-.533 0-.281-.202-.533-.484-.533z"/></svg>About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope me-1" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.708 2.825L15 11.383V5.383zm-.034 7.434-5.396-3.24L8 9.583l-.57-.343-5.396 3.24A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.183zM1 11.383l4.708-2.825L1 5.383v6z"/></svg>Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="newsletter.html"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-newspaper me-1" viewBox="0 0 16 16"><path d="M0 1.5A.5.5 0 0 1 .5 1h13a.5.5 0 0 1 .5.5V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V1.5zm1 .5v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2H1zm2 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/></svg>Newsletter</a></li>
                 </ul>
             </div>
         </div>
@@ -49,7 +64,21 @@
     </section>
     <footer class="bg-success text-white text-center py-3">
         <div class="container">
+            <div class="mb-2">
+                <i class="bi bi-geo-alt-fill"></i> Located at Level 2, Plot 132, Spring Rd BugoIobi, Kampala Uganda
+            </div>
+            <div class="mb-2">
+                <a href="https://x.com/feytigroup" class="me-2 text-white" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X" width="24"></a>
+                <a href="https://www.facebook.com/Feyti256" class="me-2 text-white" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" width="24"></a>
+                <a href="https://www.linkedin.com/company/feytimedicalgroup/" class="me-2 text-white" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" width="24"></a>
+                <a href="https://www.instagram.com/feytimedcialgroup/" class="me-2 text-white" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" width="24"></a>
+                <a href="https://www.youtube.com/@FeytiMedicalGroup/videos" class="text-white" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube" width="24"></a>
+            </div>
             <p class="mb-1">&copy; Feyti Medical Group, All rights reserved</p>
+            <div>
+                <a href="https://feytimedicalgroup.medium.com/" class="text-white me-2" target="_blank">Blog</a>
+                <a href="https://www.feytimedicalgroup.com/career" class="text-white me-2" target="_blank">Career</a>
+            </div>
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
