@@ -162,3 +162,115 @@ footer {
         height: 16px !important;
     }
 }
+body.dark-mode {
+    background-color: #181a1b !important;
+    color: #f1f1f1 !important;
+}
+body.dark-mode .navbar,
+body.dark-mode .top-info-bar,
+body.dark-mode .bg-success {
+    background-color: #23272b !important;
+    color: #f1f1f1 !important;
+}
+body.dark-mode .card,
+body.dark-mode .bg-light,
+body.dark-mode .btn-light {
+    background-color: #23272b !important;
+    color: #f1f1f1 !important;
+    border-color: #444 !important;
+}
+body.dark-mode .btn-outline-light {
+    color: #f1f1f1 !important;
+    border-color: #f1f1f1 !important;
+}
+body.dark-mode .btn-warning {
+    background-color: #ffc107 !important;
+    color: #23272b !important;
+}
+body.dark-mode .carousel-caption {
+    background: rgba(0,0,0,0.35) !important;
+}
+.fab-container {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.fab {
+    width: auto;
+    min-width: 52px;
+    height: 52px;
+    border-radius: 26px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    transition: box-shadow 0.2s, background 0.2s;
+    padding: 0 18px;
+    color: #111 !important;
+}
+.fab .fab-label {
+    color: #111 !important;
+    font-weight: 600;
+    margin-left: 0.2em;
+}
+.btn-warning.fab {
+    background-color: #ffc107 !important;
+    color: #111 !important;
+    border: none;
+}
+.btn-outline-light.fab {
+    background: #fff !important;
+    color: #111 !important;
+    border: 1px solid #ccc !important;
+}
+.fab:active, .fab:focus {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+}
+/* Chat popup styles */
+.chat-popup {
+    display: none;
+    position: fixed;
+    right: 32px;
+    bottom: 120px;
+    z-index: 2100;
+    width: 320px;
+    max-width: 90vw;
+    background: transparent;
+}
+.chat-popup-content {
+    background: #fff;
+    color: #111;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    padding: 20px 18px 14px 18px;
+    border: 1px solid #eee;
+}
+.chat-popup .btn-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+}
+@media (max-width: 576px) {
+    .fab-container {
+        bottom: 16px;
+        right: 16px;
+    }
+    .chat-popup {
+        right: 16px;
+        bottom: 100px;
+        width: 98vw;
+        max-width: 98vw;
+    }
+    .fab {
+        min-width: 44px;
+        height: 44px;
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+}

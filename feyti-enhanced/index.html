@@ -232,6 +232,28 @@
             </div>
         </div>
     </footer>
+    <!-- Floating Action Buttons -->
+    <div class="fab-container">
+        <button id="chatBtn" class="btn btn-warning fab mb-2"><span class="fab-label">Let's Chat</span></button>
+        <button id="toggleModeBtn" class="btn btn-outline-light fab"><span class="fab-label">Dark/Light</span></button>
+    </div>
+    <!-- Chat Popup Modal (custom, not Bootstrap modal) -->
+    <div id="chatPopup" class="chat-popup">
+      <div class="chat-popup-content">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <strong>Let's Chat</strong>
+          <button type="button" class="btn-close" id="closeChatPopup" aria-label="Close"></button>
+        </div>
+        <form id="chatForm">
+          <div class="mb-3">
+            <label for="chatMessage" class="form-label">Your Message</label>
+            <textarea class="form-control" id="chatMessage" rows="3" required></textarea>
+          </div>
+          <div id="chatAlert"></div>
+          <button type="submit" class="btn btn-success w-100">Send</button>
+        </form>
+      </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>

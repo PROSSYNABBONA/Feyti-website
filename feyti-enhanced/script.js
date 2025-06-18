@@ -469,3 +469,61 @@ if (window.location.pathname.endsWith('newsletter.html')) {
     });
   }
 }
+
+// Dark/Light mode toggle
+const toggleModeBtn = document.getElementById('toggleModeBtn');
+const modeIcon = document.getElementById('modeIcon');
+function setMode(mode) {
+    if (mode === 'dark') {
+        document.body.classList.add('dark-mode');
+        if (modeIcon) modeIcon.className = 'fas fa-sun me-2';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        document.body.classList.remove('dark-mode');
+        if (modeIcon) modeIcon.className = 'fas fa-moon me-2';
+        localStorage.setItem('theme', 'light');
+    }
+}
+if (toggleModeBtn) {
+    toggleModeBtn.addEventListener('click', () => {
+        const isDark = document.body.classList.contains('dark-mode');
+        setMode(isDark ? 'light' : 'dark');
+    });
+    setMode(localStorage.getItem('theme') || 'light');
+}
+// Let's Chat button - show custom popup
+const chatBtn = document.getElementById('chatBtn');
+const chatPopup = document.getElementById('chatPopup');
+const closeChatPopup = document.getElementById('closeChatPopup');
+if (chatBtn && chatPopup) {
+    chatBtn.addEventListener('click', () => {
+        chatPopup.style.display = 'block';
+        setTimeout(() => {
+            chatPopup.querySelector('textarea').focus();
+        }, 100);
+    });
+}
+if (closeChatPopup && chatPopup) {
+    closeChatPopup.addEventListener('click', () => {
+        chatPopup.style.display = 'none';
+    });
+}
+// Chat form submission
+const chatForm = document.getElementById('chatForm');
+const chatAlert = document.getElementById('chatAlert');
+if (chatForm) {
+    chatForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const message = document.getElementById('chatMessage').value.trim();
+        if (!message) {
+            chatAlert.innerHTML = '<div class="alert alert-danger">Please enter a message.</div>';
+            return;
+        }
+        chatAlert.innerHTML = '<div class="alert alert-success">Thank you for your message! We will get back to you soon.</div>';
+        chatForm.reset();
+        setTimeout(() => {
+            chatAlert.innerHTML = '';
+            chatPopup.style.display = 'none';
+        }, 2000);
+    });
+}
