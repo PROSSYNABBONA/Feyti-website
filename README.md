@@ -7,7 +7,7 @@ This repository contains the source code for the Feyti Medical Group website, in
 - `images/` — Website images and logo
 
 ## Getting Started
-Open `feyti-enhanced/home.html` in your browser to view the site.
+Open `feyti-enhanced/index.html` in your browser to view the site.
 
 ## License
 All rights reserved Feyti Medical Group.
