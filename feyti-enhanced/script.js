@@ -468,6 +468,25 @@ if (window.location.pathname.endsWith('newsletter.html')) {
       };
     });
   }
+  // --- SLIDE-IN ANIMATION FOR NEWSLETTER SECTIONS ---
+  // Select all main .container elements inside newsletter sections
+  const newsletterSections = document.querySelectorAll('section > .container');
+  newsletterSections.forEach((container, i) => {
+    container.classList.add('slide-init');
+    container.style.transitionDelay = (i * 80) + 'ms';
+  });
+  function animateNewsletterSections() {
+    const windowHeight = window.innerHeight;
+    newsletterSections.forEach(container => {
+      const top = container.getBoundingClientRect().top;
+      if (top < windowHeight - 40) {
+        container.classList.add('slide-in');
+        container.classList.remove('slide-init');
+      }
+    });
+  }
+  window.addEventListener('scroll', animateNewsletterSections);
+  setTimeout(animateNewsletterSections, 200); // initial check
 }
 
 // Dark/Light mode toggle
@@ -525,5 +544,42 @@ if (chatForm) {
             chatAlert.innerHTML = '';
             chatPopup.style.display = 'none';
         }, 2000);
+    });
+}
+
+// Emoji picker functionality
+const emojiBtn = document.getElementById('emojiBtn');
+const emojiPicker = document.getElementById('emojiPicker');
+const chatMessage = document.getElementById('chatMessage');
+if (emojiBtn && emojiPicker && chatMessage) {
+    const emojis = ['😀','😁','😂','🤣','😊','😍','😎','😢','😡','👍','🙏','🎉','❤️','🔥','👏','😇','😜','🤔','😱','🥳'];
+    emojiPicker.innerHTML = emojis.map(e => `<span>${e}</span>`).join('');
+    emojiBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        emojiPicker.style.display = emojiPicker.style.display === 'block' ? 'none' : 'block';
+        const rect = emojiBtn.getBoundingClientRect();
+        emojiPicker.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+        emojiPicker.style.left = (rect.left + window.scrollX) + 'px';
+    });
+    emojiPicker.addEventListener('click', function(e) {
+        if (e.target.tagName === 'SPAN') {
+            chatMessage.value += e.target.textContent;
+            emojiPicker.style.display = 'none';
+            chatMessage.focus();
+        }
+    });
+    document.addEventListener('click', function(e) {
+        if (!emojiPicker.contains(e.target) && e.target !== emojiBtn) {
+            emojiPicker.style.display = 'none';
+        }
+    });
+}
+// File input handling (optional: show file name)
+const fileInput = document.getElementById('fileInput');
+if (fileInput) {
+    fileInput.addEventListener('change', function() {
+        if (fileInput.files.length > 0) {
+            chatMessage.value += ` [File: ${fileInput.files[0].name}]`;
+        }
     });
 }
