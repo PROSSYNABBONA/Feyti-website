@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Medical Writing & Editing - Feyti Medical Group</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #1e293b;
+      padding-top: 180px;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .hero-section {
+      background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
+                  url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+      background-size: cover;
+      background-position: center;
+      border-radius: 16px;
+      padding: 4rem 2rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: #059669;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #334155;
+      margin-bottom: 2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .service-block {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      border: 1px solid #e2e8f0;
+      background-color: #f8fdfa;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0, 128, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .service-block:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-icon {
+      width: 70px;
+      height: 70px;
+      flex-shrink: 0;
+    }
+
+    .service-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: #059669;
+    }
+
+    .service-content {
+      flex: 1;
+    }
+
+    .service-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #065f46;
+      margin-bottom: 0.6rem;
+    }
+
+    .service-description {
+      font-size: 1rem;
+      color: #334155;
+      line-height: 1.7;
+    }
+
+    .service-image {
+      width: 300px;
+      height: 200px;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .benefits-section {
+      background-color: #f0fdf4;
+      border-radius: 16px;
+      padding: 3rem;
+      margin: 4rem 0;
+    }
+
+    .benefits-title {
+      font-size: 1.8rem;
+      color: #065f46;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .benefit-icon {
+      color: #059669;
+      font-size: 1.5rem;
+      margin-top: 0.2rem;
+    }
+
+    @media (max-width: 992px) {
+      .service-image {
+        width: 250px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 220px;
+      }
+      
+      .hero-section {
+        padding: 3rem 1.5rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .service-block {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .service-image {
+        width: 100%;
+        height: 180px;
+        order: -1;
+      }
+    }
+
+    /* Navbar styling */
+    .navbar {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .top-info-bar {
+      background-color: rgba(0,0,0,0.1);
+    }
+    
+    .social-icons img {
+      width: 24px;
+      height: 24px;
+      margin: 0 5px;
+      filter: brightness(0) invert(1);
+    }
+    
+    /* Footer styling */
+    footer {
+      background-color: #059669;
+    }
+    
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+    <div class="container-fluid">
+      <div class="d-flex flex-column w-100">
+        <div class="top-info-bar w-100 d-flex flex-wrap justify-content-between align-items-center px-3 py-2" style="gap:1em;">
+          <div class="d-flex align-items-center" style="gap:0.7em;">
+            <a class="navbar-brand fw-bold d-flex align-items-center mb-0 p-0" href="home.html" style="gap:0.5em;">
+              <img src="images/Feyti Medical Group Logo-03 (1).jpg" alt="Feyti Logo" width="64" height="64"
+                style="object-fit:contain; background:#fff; border-radius:8px;" />
+              <span class="fs-3" style="letter-spacing:0.5px;">Feyti Medical Group</span>
+            </a>
+            <span class="location d-flex align-items-center ms-3 d-none d-lg-flex">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#fff" viewBox="0 0 16 16" class="me-1">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+              </svg>
+              <span>Located at Level 2, Plot 132, Spring Rd BugoIobi, Kampala Uganda</span>
+            </span>
+          </div>
+          <div class="social-icons d-flex align-items-center">
+            <a href="https://x.com/feytigroup" target="_blank"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X"></a>
+            <a href="https://www.facebook.com/Feyti256" target="_blank"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
+                alt="Facebook"></a>
+            <a href="https://www.linkedin.com/company/feytimedicalgroup/" target="_blank"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg"
+                alt="LinkedIn"></a>
+            <a href="https://www.instagram.com/feytimedcialgroup/" target="_blank"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
+                alt="Instagram"></a>
+            <a href="https://www.youtube.com/@FeytiMedicalGroup/videos" target="_blank"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube"></a>
+          </div>
+        </div>
+        <div class="container-fluid justify-content-center px-0">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" href="home.html"><i class="bi bi-house-door me-1"></i>Home</a></li>
+              <li class="nav-item"><a class="nav-link active" href="services.html"><i class="bi bi-briefcase me-1"></i>Services</a></li>
+              <li class="nav-item"><a class="nav-link" href="about.html"><i class="bi bi-info-circle me-1"></i>About</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.html"><i class="bi bi-envelope me-1"></i>Contact</a></li>
+              <li class="nav-item"><a class="nav-link" href="newsletter.html"><i class="bi bi-newspaper me-1"></i>Newsletter</a></li>
+              <li class="nav-item"><a class="nav-link" href="faq.html"><i class="bi bi-question-circle me-1"></i>FAQs</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="hero-section">
+      <h1 class="section-title">Medical Writing & Scientific Communication</h1>
+      <p class="intro-text">
+        In the complex realm of medical and scientific communication, where precision and clarity are paramount, Feyti Medical Group emerges as your beacon of excellence. We recognize the profound impact effective communication holds in advancing groundbreaking research, shaping informed healthcare decisions, and empowering individuals worldwide.
+      </p>
+    </div>
+
+    <div class="service-block">
+      <div class="service-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M19 4h-1V2H6v2H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2Zm0 16H5V6h14v14Zm-7-9h5v2h-5v5h-2v-5H7v-2h5V6h2v5Z"/>
+        </svg>
+      </div>
+      <div class="service-content">
+        <h2 class="service-title">Medical Writing</h2>
+        <p class="service-description">
+          We write, edit, and format various types of documents, such as Standard Operating Procedures (SOPs), manuscripts, abstracts, posters, slides, clinical trial study protocols, study reports, reviews, newsletters, brochures, and consumer drug/medical device information. We also provide literature search, data analysis, and reference management services.
+        </p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Medical Writing" class="service-image d-none d-lg-block">
+    </div>
+
+    <div class="service-block">
+      <img src="images/Dream job.jpeg" alt="Scientific Editing" class="service-image d-none d-lg-block">
+      <div class="service-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17 4H7a2 2 0 0 0-2 2v1h14V6a2 2 0 0 0-2-2Zm3 4H4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Zm-4 3H8v2h8v-2Z"/>
+        </svg>
+      </div>
+      <div class="service-content">
+        <h2 class="service-title">Scientific Editing</h2>
+        <p class="service-description">
+          We proofread and revise your documents to ensure they are clear, concise, accurate, and consistent. We check and correct grammar, spelling, punctuation, and style. We also assist with formatting, referencing, and aligning documents with submission guidelines for your target journals or publishers.
+        </p>
+      </div>
+    </div>
+
+    <div class="service-block">
+      <div class="service-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M19 3H5a2 2 0 0 0-2 2v14l4-4h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"/>
+        </svg>
+      </div>
+      <div class="service-content">
+        <h2 class="service-title">Translation</h2>
+        <p class="service-description">
+          We translate documents from and into various languages, including English, Kiswahili, and French. We also offer  proofreading services to ensure your translated content maintains accuracy and quality across languages.
+        </p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Translation Services" class="service-image d-none d-lg-block">
+    </div>
+
+    <div class="benefits-section">
+      <h2 class="benefits-title">Why Choose Our Medical Writing Services?</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="benefit-item">
+            <i class="bi bi-check-circle-fill benefit-icon"></i>
+            <div>
+              <h3 style="color: #065f46; font-size: 1.2rem;">Subject Matter Experts</h3>
+              <p>Our team includes professionals with advanced degrees in medicine, life sciences, and related fields.</p>
+            </div>
+          </div>
+          <div class="benefit-item">
+            <i class="bi bi-check-circle-fill benefit-icon"></i>
+            <div>
+              <h3 style="color: #065f46; font-size: 1.2rem;">Regulatory Compliance</h3>
+              <p>We ensure all documents meet current regulatory standards and guidelines.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="benefit-item">
+            <i class="bi bi-check-circle-fill benefit-icon"></i>
+            <div>
+              <h3 style="color: #065f46; font-size: 1.2rem;">Timely Delivery</h3>
+              <p>We understand deadlines and deliver high-quality work on time, every time.</p>
+            </div>
+          </div>
+          <div class="benefit-item">
+            <i class="bi bi-check-circle-fill benefit-icon"></i>
+            <div>
+              <h3 style="color: #065f46; font-size: 1.2rem;">Confidentiality</h3>
+              <p>Your sensitive information is protected with strict confidentiality agreements.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Team Working" class="img-fluid rounded" style="max-height: 400px; width: 100%; object-fit: cover;">
+      <p class="mt-3" style="font-style: italic; color: #64748b;">Our team of medical writers and editors working collaboratively to deliver excellence</p>
+    </div>
+  </div>
+  
+  <footer class="bg-success text-white py-3">
+    <div class="container">
+      <div class="mb-2">
+        <i class="bi bi-geo-alt-fill"></i> Located at Level 2, Plot 132, Spring Rd BugoIobi, Kampala Uganda
+      </div>
+      <div class="mb-2">
+        <a href="https://x.com/feytigroup" class="me-2 text-white" target="_blank"><i class="bi bi-twitter-x"></i></a>
+        <a href="https://www.facebook.com/Feyti256" class="me-2 text-white" target="_blank"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.linkedin.com/company/feytimedicalgroup/" class="me-2 text-white" target="_blank"><i class="bi bi-linkedin"></i></a>
+        <a href="https://www.instagram.com/feytimedcialgroup/" class="me-2 text-white" target="_blank"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.youtube.com/@FeytiMedicalGroup/videos" class="text-white" target="_blank"><i class="bi bi-youtube"></i></a>
+      </div>
+      <p class="mb-1">&copy; Feyti Medical Group, All rights reserved</p>
+      <div>
+        <a href="https://feytimedicalgroup.medium.com/" class="text-white me-2" target="_blank">Blog</a>
+        <a href="https://www.feytimedicalgroup.com/career" class="text-white me-2" target="_blank">Career</a>
+        <a href="faq.html" class="text-white me-3">FAQs</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

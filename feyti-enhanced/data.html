@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Management & Analysis - Feyti Medical Group</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #1e293b;
+      padding-top: 180px;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .hero-section {
+      background-color: #f0fdf4;
+      border-radius: 16px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-image {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 40%;
+      background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+      background-size: cover;
+      background-position: center;
+      border-top-right-radius: 16px;
+      border-bottom-right-radius: 16px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: #059669;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #334155;
+      margin-bottom: 2rem;
+      max-width: 55%;
+    }
+
+    .service-card {
+      border: 1px solid #e2e8f0;
+      background-color: #f8fdfa;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(5, 150, 105, 0.1);
+    }
+
+    .service-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #065f46;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .service-icon {
+      color: #059669;
+      font-size: 1.8rem;
+    }
+
+    .service-description {
+      font-size: 1rem;
+      color: #334155;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 992px) {
+      .hero-image {
+        display: none;
+      }
+      
+      .intro-text {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 220px;
+      }
+      
+      .hero-section {
+        padding: 2rem 1.5rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+    <div class="container-fluid">
+      <div class="d-flex flex-column w-100">
+        <div class="top-info-bar w-100 d-flex flex-wrap justify-content-between align-items-center px-3 py-2" style="gap:1em;">
+          <div class="d-flex align-items-center" style="gap:0.7em;">
+            <a class="navbar-brand fw-bold d-flex align-items-center mb-0 p-0" href="home.html" style="gap:0.5em;">
+              <img src="images/Feyti Medical Group Logo-03 (1).jpg" alt="Feyti Logo" width="64" height="64"
+                style="object-fit:contain; background:#fff; border-radius:8px;" />
+              <span class="fs-3" style="letter-spacing:0.5px;">Feyti Medical Group</span>
+            </a>
+            <span class="location d-flex align-items-center ms-3 d-none d-lg-flex">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#fff" viewBox="0 0 16 16" class="me-1">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+              </svg>
+              <span>Located at Level 2, Plot 132, Spring Rd BugoIobi, Kampala Uganda</span>
+            </span>
+          </div>
+          <div class="social-icons d-flex align-items-center">
+            <a href="https://x.com/feytigroup" target="_blank"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X"></a>
+            <a href="https://www.facebook.com/Feyti256" target="_blank"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
+                alt="Facebook"></a>
+            <a href="https://www.linkedin.com/company/feytimedicalgroup/" target="_blank"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg"
+                alt="LinkedIn"></a>
+            <a href="https://www.instagram.com/feytimedcialgroup/" target="_blank"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
+                alt="Instagram"></a>
+            <a href="https://www.youtube.com/@FeytiMedicalGroup/videos" target="_blank"><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube"></a>
+          </div>
+        </div>
+        <div class="container-fluid justify-content-center px-0">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" href="home.html"><i class="bi bi-house-door me-1"></i>Home</a></li>
+              <li class="nav-item"><a class="nav-link active" href="services.html"><i class="bi bi-briefcase me-1"></i>Services</a></li>
+              <li class="nav-item"><a class="nav-link" href="about.html"><i class="bi bi-info-circle me-1"></i>About</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.html"><i class="bi bi-envelope me-1"></i>Contact</a></li>
+              <li class="nav-item"><a class="nav-link" href="newsletter.html"><i class="bi bi-newspaper me-1"></i>Newsletter</a></li>
+              <li class="nav-item"><a class="nav-link" href="faq.html"><i class="bi bi-question-circle me-1"></i>FAQs</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1 class="section-title">Unleash the Power of Data</h1>
+        <p class="intro-text">
+          In today's data-driven world, organizations are awash in a sea of information. Making sense of this vast and ever-growing volume of data is crucial for informed decision-making, strategic planning, and achieving competitive advantage.
+        </p>
+      </div>
+      <div class="hero-image"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 3rem;">
+          At Feyti, we understand the challenges our clients face in harnessing the power of their data. That's why we offer comprehensive data management and statistical analysis services tailored to their specific needs. We collect, organize, store, and analyse their data using the latest tools and techniques.
+        </p>
+      </div>
+    </div>
+
+    <h2 class="text-center mb-4" style="color: #065f46; font-weight: 700;">Our Data Services</h2>
+
+    <div class="service-card">
+      <h3 class="service-title">
+        <i class="bi bi-clipboard-data service-icon"></i>
+        Data Collection
+      </h3>
+      <p class="service-description">
+        We design and implement data collection methods, such as questionnaires, interviews, focus groups, observations, or experiments. We also assist with data entry, validation, and cleaning to ensure your data is accurate and ready for analysis.
+      </p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">
+        <i class="bi bi-database service-icon"></i>
+        Data Management
+      </h3>
+      <p class="service-description">
+        We store and organize data in a secure and efficient way, using databases, spreadsheets, or cloud platforms. Our services include data integration, transformation, and migration to ensure your information flows seamlessly across your organization.
+      </p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">
+        <i class="bi bi-bar-chart-line service-icon"></i>
+        Data Analysis
+      </h3>
+      <p class="service-description">
+        We offer expertise in analysing your data comprehensively through descriptive, inferential, or predictive statistical methods. Furthermore, we excel in visualizing and effectively communicating your data using charts, graphs, tables, or interactive dashboards that tell compelling stories.
+      </p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">
+        <i class="bi bi-lightbulb service-icon"></i>
+        Data Consulting
+      </h3>
+      <p class="service-description">
+        Our expertise extends to addressing diverse data-related inquiries and complexities, encompassing areas like data strategy, ensuring data quality, establishing robust data governance frameworks, and adhering to ethical data practices. Additionally, we offer tailored training and support to enhance the capabilities of your data team or staff.
+      </p>
+    </div>
+  </div>
+  
+  <footer class="bg-success text-white py-3">
+    <div class="container">
+      <div class="mb-2">
+        <i class="bi bi-geo-alt-fill"></i> Located at Level 2, Plot 132, Spring Rd BugoIobi, Kampala Uganda
+      </div>
+      <div class="mb-2">
+        <a href="https://x.com/feytigroup" class="me-2 text-white" target="_blank"><i class="bi bi-twitter-x"></i></a>
+        <a href="https://www.facebook.com/Feyti256" class="me-2 text-white" target="_blank"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.linkedin.com/company/feytimedicalgroup/" class="me-2 text-white" target="_blank"><i class="bi bi-linkedin"></i></a>
+        <a href="https://www.instagram.com/feytimedcialgroup/" class="me-2 text-white" target="_blank"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.youtube.com/@FeytiMedicalGroup/videos" class="text-white" target="_blank"><i class="bi bi-youtube"></i></a>
+      </div>
+      <p class="mb-1">&copy; Feyti Medical Group, All rights reserved</p>
+      <div>
+        <a href="https://feytimedicalgroup.medium.com/" class="text-white me-2" target="_blank">Blog</a>
+        <a href="https://www.feytimedicalgroup.com/career" class="text-white me-2" target="_blank">Career</a>
+        <a href="faq.html" class="text-white me-3">FAQs</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
