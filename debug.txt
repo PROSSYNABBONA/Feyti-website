@@ -1,7 +1,7 @@
 Array
 (
     [test] => testvalue
-    [name] => Nabbona Pro
-    [email] => prossienabbona222@gmail.com
+    [name] => Nabbona Prossy
+    [email] => prossienabbona20@gmail.com
     [message] => ggg
 )
