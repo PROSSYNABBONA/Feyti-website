@@ -1,0 +1,7 @@
+Array
+(
+    [test] => testvalue
+    [name] => Nabbona Pro
+    [email] => prossienabbona222@gmail.com
+    [message] => ggg
+)

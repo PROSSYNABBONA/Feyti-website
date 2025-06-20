@@ -1,0 +1,320 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding-top: 90px;
+}
+.hero {
+    background: none !important;
+    min-height: 420px;
+    padding: 0;
+    position: relative;
+}
+#heroCarouselHome, #heroCarousel {
+    min-height: 420px;
+}
+#heroCarouselHome .carousel-item img, #heroCarousel .carousel-item img {
+    width: 100vw;
+    height: 420px;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.7;
+}
+#heroCarouselHome .carousel-caption, #heroCarousel .carousel-caption {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px;
+}
+.card {
+    transition: all 0.3s;
+}
+.card-title {
+    font-weight: 600;
+}
+.card-img-top {
+    max-height: 100px;
+    object-fit: contain;
+}
+.social-links img {
+    filter: grayscale(1) brightness(0.7);
+    transition: filter 0.2s;
+}
+.social-links img:hover {
+    filter: none;
+}
+footer {
+    letter-spacing: 0.5px;
+}
+.btn-success, .bg-success {
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+}
+.text-success {
+    color: #198754 !important;
+}
+.shake {
+    animation: shake 0.3s;
+}
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-8px); }
+    80% { transform: translateX(8px); }
+    100% { transform: translateX(0); }
+}
+.navbar-brand img {
+    vertical-align: middle;
+}
+/* Top info bar styles */
+.top-info-bar {
+    background: #157347;
+    color: #fff;
+    font-size: 0.98rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid #19875433;
+    z-index: 1051;
+}
+.top-info-bar .location {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+.top-info-bar .location i {
+    color: #fff;
+    margin-right: 0.4em;
+    font-size: 1.1em;
+}
+.top-info-bar .social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    border-radius: 50%;
+    background: #198754;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(33,150,83,0.08);
+}
+.top-info-bar .social-icons a:hover {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(33,150,83,0.18);
+}
+.top-info-bar .social-icons img {
+    width: 18px;
+    height: 18px;
+    filter: brightness(0) invert(1);
+    transition: filter 0.2s;
+}
+.top-info-bar .social-icons a:hover img {
+    filter: none;
+}
+@media (max-width: 991px) {
+    .top-info-bar {
+        flex-direction: column;
+        text-align: center;
+        font-size: 0.95rem;
+    }
+    .top-info-bar .d-flex.align-items-center {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.2em;
+    }
+    .top-info-bar .location {
+        justify-content: center !important;
+        margin-bottom: 0.2em;
+        margin-left: 0 !important;
+        width: 100%;
+    }
+    .top-info-bar .social-icons {
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 0.3em;
+        margin-top: 0.2em;
+        width: 100%;
+    }
+}
+@media (max-width: 576px) {
+    .top-info-bar {
+        padding-top: 0.3rem !important;
+        padding-bottom: 0.3rem !important;
+        font-size: 0.88rem !important;
+    }
+    .navbar-brand img {
+        width: 44px !important;
+        height: 44px !important;
+    }
+    .navbar-brand .fs-3 {
+        font-size: 1.2rem !important;
+    }
+    .top-info-bar .location svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+}
+body.dark-mode {
+    background-color: #181a1b !important;
+    color: #f1f1f1 !important;
+}
+body.dark-mode .navbar,
+body.dark-mode .top-info-bar,
+body.dark-mode .bg-success {
+    background-color: #23272b !important;
+    color: #f1f1f1 !important;
+}
+body.dark-mode .card,
+body.dark-mode .bg-light,
+body.dark-mode .btn-light {
+    background-color: #23272b !important;
+    color: #f1f1f1 !important;
+    border-color: #444 !important;
+}
+body.dark-mode .btn-outline-light {
+    color: #f1f1f1 !important;
+    border-color: #f1f1f1 !important;
+}
+body.dark-mode .btn-warning {
+    background-color: #ffc107 !important;
+    color: #23272b !important;
+}
+body.dark-mode .carousel-caption {
+    background: rgba(0,0,0,0.35) !important;
+}
+.fab-container {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.fab {
+    width: auto;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    transition: box-shadow 0.2s, background 0.2s;
+    padding: 0 10px;
+    color: #111 !important;
+}
+.fab .fab-label {
+    color: #111 !important;
+    font-weight: 600;
+    margin-left: 0.1em;
+}
+.btn-warning.fab {
+    background-color: #ffc107 !important;
+    color: #111 !important;
+    border: none;
+}
+.btn-outline-light.fab {
+    background: #fff !important;
+    color: #111 !important;
+    border: 1px solid #ccc !important;
+}
+.fab:active, .fab:focus {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+}
+/* Chat popup styles */
+.chat-popup {
+    display: none;
+    position: fixed;
+    right: 32px;
+    bottom: 120px;
+    z-index: 2100;
+    width: 320px;
+    max-width: 90vw;
+    background: transparent;
+}
+.chat-popup-content {
+    background: #fff;
+    color: #111;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    padding: 20px 18px 14px 18px;
+    border: 1px solid #eee;
+    position: relative; /* Ensure emoji picker is positioned correctly */
+    min-width: 260px;
+}
+.chat-popup .btn-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+}
+.emoji-picker {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    max-width: 220px;
+    max-height: 180px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 1.3rem;
+}
+.emoji-picker span {
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: background 0.15s;
+}
+.emoji-picker span:hover {
+    background: #f1f1f1;
+}
+.fab .fas {
+    color: #111 !important;
+}
+@media (max-width: 576px) {
+    .fab-container {
+        bottom: 16px;
+        right: 16px;
+    }
+    .chat-popup {
+        right: 16px;
+        bottom: 100px;
+        width: 98vw;
+        max-width: 98vw;
+    }
+    .fab {
+        min-width: 28px;
+        height: 28px;
+        font-size: 0.85rem;
+        padding: 0 6px;
+    }
+    .fab .fas, .fab .fa {
+        font-size: 0.85rem !important;
+    }
+    .fab-label {
+        font-size: 0.85rem;
+    }
+}
+/* Slide animation classes */
+.slide-init {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s cubic-bezier(.4,2,.3,1);
+}
+.slide-in {
+    opacity: 1;
+    transform: translateY(0);
+}
