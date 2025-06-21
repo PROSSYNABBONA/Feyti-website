@@ -277,23 +277,6 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      // Chat button and popup functionality
-      document.getElementById('chatBtn').addEventListener('click', function() {
-        document.getElementById('chatPopup').style.display = 'block';
-      });
-      document.getElementById('closeChatPopup').addEventListener('click', function() {
-        document.getElementById('chatPopup').style.display = 'none';
-      });
-      document.getElementById('chatForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const message = document.getElementById('chatMessage').value;
-        document.getElementById('chatAlert').innerHTML = '<div class="alert alert-success" role="alert">Message sent: ' + message + '</div>';
-        document.getElementById('chatMessage').value = '';
-        setTimeout(() => {
-          document.getElementById('chatAlert').innerHTML = '';
-        }, 3000);
-      });
-    </script>
+    <script src="feyti-chatbot.js"></script>
 </body>
 </html>
