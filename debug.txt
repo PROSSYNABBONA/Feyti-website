@@ -1,7 +1,7 @@
 Array
 (
     [test] => testvalue
-    [name] => gggg
+    [name] => Prooy
     [email] => prossienabbona222@gmail.com
-    [message] => hhh
+    [message] => Do you offer medical writing?
 )
