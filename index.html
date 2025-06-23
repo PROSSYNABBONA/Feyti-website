@@ -303,22 +303,37 @@
                 e.preventDefault();
                 newsletterAlertHome.innerHTML = '';
                 if(emailInput) { emailInput.focus(); emailInput.blur(); }
-                setTimeout(function() {
+                let start = Date.now();
+                let submitted = false;
+                function trySubmit() {
                     let emailValue = emailInput ? emailInput.value.trim() : '';
-                    if (!emailValue) {
-                        // Try again after a slightly longer delay
-                        setTimeout(function() {
-                            let delayedValue = emailInput ? emailInput.value.trim() : '';
-                            if (!delayedValue) {
-                                newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
-                                return;
-                            }
-                            submitNewsletter(delayedValue);
-                        }, 200);
-                        return;
+                    if (emailValue && !submitted) {
+                        submitted = true;
+                        observer.disconnect();
+                        submitNewsletter(emailValue);
+                    } else if (Date.now() - start > 1000 && !submitted) {
+                        submitted = true;
+                        observer.disconnect();
+                        newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
                     }
-                    submitNewsletter(emailValue);
+                }
+                // Observe value changes
+                const observer = new MutationObserver(trySubmit);
+                if(emailInput) {
+                    observer.observe(emailInput, { attributes: true, attributeFilter: ['value'] });
+                }
+                // Also poll every 100ms for 1s
+                let pollInterval = setInterval(() => {
+                    if (submitted) { clearInterval(pollInterval); return; }
+                    trySubmit();
                 }, 100);
+                // Initial check
+                setTimeout(trySubmit, 120);
+                // Fallback after 1s
+                setTimeout(() => {
+                    if (!submitted) trySubmit();
+                    clearInterval(pollInterval);
+                }, 1050);
                 function submitNewsletter(emailValue) {
                     const formData = new URLSearchParams();
                     formData.append('email', emailValue);
@@ -331,7 +346,6 @@
                     .then(data => {
                         newsletterAlertHome.innerHTML = `<div class='alert alert-success'>${data}</div>`;
                         newsletterFormHome.reset();
-                        trackedEmailValue = '';
                     })
                     .catch(error => {
                         newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
