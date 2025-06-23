@@ -11,6 +11,7 @@ require 'PHPMailer/src/SMTP.php';
 
 // Simple contact form handler
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    header('Content-Type: application/json');
     // Debug: log POST data
     file_put_contents(__DIR__ . '/debug.txt', print_r($_POST, true));
     $name = trim(isset($_POST['name']) ? $_POST['name'] : '');
@@ -39,12 +40,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->Body    = "Name: $name\nEmail: $email\nMessage:\n$message";
 
             $mail->send();
-            echo 'Thank you! Your message has been sent.';
+            echo json_encode(['success' => true, 'message' => 'Thank you! Your message has been sent.']);
         } catch (Exception $e) {
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
+            echo json_encode(['success' => false, 'message' => 'Mailer Error: ' . $mail->ErrorInfo]);
         }
     } else {
-        echo 'Please fill in all fields.';
+        echo json_encode(['success' => false, 'message' => 'Please fill in all fields.']);
     }
     exit;
 }
