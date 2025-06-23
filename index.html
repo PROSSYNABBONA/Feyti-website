@@ -302,24 +302,23 @@
             newsletterFormHome.addEventListener('submit', function(e) {
                 e.preventDefault();
                 newsletterAlertHome.innerHTML = '';
-                // Force update tracked value right before submit (microtask)
-                Promise.resolve().then(() => {
-                    if(emailInput) trackedEmailValue = emailInput.value.trim();
-                    let emailValue = emailInput ? emailInput.value.trim() : trackedEmailValue;
+                if(emailInput) { emailInput.focus(); emailInput.blur(); }
+                setTimeout(function() {
+                    let emailValue = emailInput ? emailInput.value.trim() : '';
                     if (!emailValue) {
-                        // Try again after a short delay in case autofill just populated
+                        // Try again after a slightly longer delay
                         setTimeout(function() {
-                            let delayedValue = emailInput ? emailInput.value.trim() : trackedEmailValue;
+                            let delayedValue = emailInput ? emailInput.value.trim() : '';
                             if (!delayedValue) {
                                 newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
                                 return;
                             }
                             submitNewsletter(delayedValue);
-                        }, 150);
+                        }, 200);
                         return;
                     }
                     submitNewsletter(emailValue);
-                });
+                }, 100);
                 function submitNewsletter(emailValue) {
                     const formData = new URLSearchParams();
                     formData.append('email', emailValue);
