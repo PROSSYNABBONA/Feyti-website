@@ -321,7 +321,12 @@
                 })
                 .then(response => response.text())
                 .then(data => {
-                    newsletterAlertHome.innerHTML = `<div class='alert alert-success'>${data}</div>`;
+                    console.log('Newsletter response:', data);
+                    if(data && data.trim().length > 0) {
+                        newsletterAlertHome.innerHTML = `<div class='alert alert-success'>${data}</div>`;
+                    } else {
+                        newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later. (No response from server)</div>`;
+                    }
                     newsletterFormHome.reset();
                 })
                 .catch(error => {
