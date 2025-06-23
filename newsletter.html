@@ -157,7 +157,7 @@
             <label for="chatMessage" class="form-label mb-0">Your Message</label>
             <button type="button" id="emojiBtn" class="btn btn-light btn-sm" title="Add emoji"><span class="fas fa-smile"></span></button>
           </div>
-          <input type="email" class="form-control mb-2" id="chatEmail" name="email" placeholder="Your Email (optional)">
+          <input type="email" class="form-control mb-2" id="chatEmail" name="
           <textarea class="form-control" id="chatMessage" name="chatMessage" rows="3" required></textarea>
           <div id="emojiPicker" class="emoji-picker" style="display:none;position:absolute;z-index:3000;"></div>
           <div id="chatAlert"></div>
@@ -177,9 +177,7 @@
             newsletterForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 newsletterAlert.innerHTML = '';
-                const emailInput = document.getElementById('newsletterEmail');
-                emailInput.value = emailInput.value.trim();
-                let emailValue = emailInput.value || newsletterForm.elements['email'].value;
+                let emailValue = newsletterForm.elements['email'].value.trim();
                 if (!emailValue) {
                     newsletterAlert.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
                     return;

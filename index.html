@@ -287,10 +287,7 @@
             newsletterFormHome.addEventListener('submit', function(e) {
                 e.preventDefault();
                 newsletterAlertHome.innerHTML = '';
-                const emailInput = document.getElementById('newsletterEmailHome');
-                // Force trim and re-check value, fallback to form value
-                emailInput.value = emailInput.value.trim();
-                let emailValue = emailInput.value || newsletterFormHome.elements['email'].value;
+                let emailValue = newsletterFormHome.elements['email'].value.trim();
                 if (!emailValue) {
                     newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
                     return;
