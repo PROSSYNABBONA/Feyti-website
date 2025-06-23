@@ -193,29 +193,32 @@
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
             newsletterAlert.innerHTML = '';
-            // Always update tracked value before submit
-            if(emailInput) trackedEmailValue = emailInput.value.trim();
-            let emailValue = trackedEmailValue || (emailInput ? emailInput.value.trim() : '');
-            if (!emailValue) {
-                newsletterAlert.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
-                return;
+            if(emailInput) {
+                // Force autofill commit
+                emailInput.dispatchEvent(new Event('change', { bubbles: true }));
             }
-            const formData = new URLSearchParams();
-            formData.append('email', emailValue);
-            fetch('newsletter-subscribe.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: formData.toString()
-            })
-            .then(response => response.text())
-            .then(data => {
-                newsletterAlert.innerHTML = `<div class='alert alert-success'>${data}</div>`;
-                newsletterForm.reset();
-                trackedEmailValue = '';
-            })
-            .catch(error => {
-                newsletterAlert.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
-            });
+            setTimeout(function() {
+                let emailValue = newsletterForm.elements['email'] && newsletterForm.elements['email'].value ? newsletterForm.elements['email'].value.trim() : '';
+                if (!emailValue) {
+                    newsletterAlert.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
+                    return;
+                }
+                const formData = new URLSearchParams();
+                formData.append('email', emailValue);
+                fetch('newsletter-subscribe.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData.toString()
+                })
+                .then(response => response.text())
+                .then(data => {
+                    newsletterAlert.innerHTML = `<div class='alert alert-success'>${data}</div>`;
+                    newsletterForm.reset();
+                })
+                .catch(error => {
+                    newsletterAlert.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
+                });
+            }, 50);
         });
     }
 });

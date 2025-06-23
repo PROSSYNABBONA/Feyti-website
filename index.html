@@ -302,39 +302,16 @@
             newsletterFormHome.addEventListener('submit', function(e) {
                 e.preventDefault();
                 newsletterAlertHome.innerHTML = '';
-                if(emailInput) { emailInput.focus(); emailInput.blur(); }
-                let start = Date.now();
-                let submitted = false;
-                function trySubmit() {
-                    let emailValue = emailInput ? emailInput.value.trim() : '';
-                    if (emailValue && !submitted) {
-                        submitted = true;
-                        observer.disconnect();
-                        submitNewsletter(emailValue);
-                    } else if (Date.now() - start > 1000 && !submitted) {
-                        submitted = true;
-                        observer.disconnect();
-                        newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
-                    }
-                }
-                // Observe value changes
-                const observer = new MutationObserver(trySubmit);
                 if(emailInput) {
-                    observer.observe(emailInput, { attributes: true, attributeFilter: ['value'] });
+                    // Force autofill commit
+                    emailInput.dispatchEvent(new Event('change', { bubbles: true }));
                 }
-                // Also poll every 100ms for 1s
-                let pollInterval = setInterval(() => {
-                    if (submitted) { clearInterval(pollInterval); return; }
-                    trySubmit();
-                }, 100);
-                // Initial check
-                setTimeout(trySubmit, 120);
-                // Fallback after 1s
-                setTimeout(() => {
-                    if (!submitted) trySubmit();
-                    clearInterval(pollInterval);
-                }, 1050);
-                function submitNewsletter(emailValue) {
+                setTimeout(function() {
+                    let emailValue = newsletterFormHome.elements['email'] && newsletterFormHome.elements['email'].value ? newsletterFormHome.elements['email'].value.trim() : '';
+                    if (!emailValue) {
+                        newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
+                        return;
+                    }
                     const formData = new URLSearchParams();
                     formData.append('email', emailValue);
                     fetch('newsletter-subscribe.php', {
@@ -350,7 +327,7 @@
                     .catch(error => {
                         newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
                     });
-                }
+                }, 50);
             });
         }
     });
