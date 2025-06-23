@@ -305,41 +305,28 @@
                 newsletterAlertHome.innerHTML = '';
                 let emailValue = '';
                 if(emailInput) {
-                    // Always read directly from the input at submit time
                     emailValue = emailInput.value.trim();
-                    emailInput.dispatchEvent(new Event('change', { bubbles: true }));
                 }
-                setTimeout(function() {
-                    // Fallback to tracked value if main value is empty
-                    if(!emailValue && trackedEmailValue) {
-                        emailValue = trackedEmailValue;
-                    }
-                    // As a last resort, try reading from the form element
-                    if(!emailValue && newsletterFormHome.elements['email'] && newsletterFormHome.elements['email'].value) {
-                        emailValue = newsletterFormHome.elements['email'].value.trim();
-                    }
-                    if(!emailValue) {
-                        newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Please click or type in the email field to confirm your email address.</div>`;
-                        if(emailInput) emailInput.focus();
-                        return;
-                    }
-                    const formData = new URLSearchParams();
-                    formData.append('email', emailValue);
-                    fetch('newsletter-subscribe.php', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: formData.toString()
-                    })
-                    .then(response => response.text())
-                    .then(data => {
-                        newsletterAlertHome.innerHTML = `<div class='alert alert-success'>${data}</div>`;
-                        newsletterFormHome.reset();
-                        trackedEmailValue = '';
-                    })
-                    .catch(error => {
-                        newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
-                    });
-                }, 50);
+                // Let browser handle required validation, just check again for safety
+                if(!emailValue) {
+                    // Browser will show its own required message
+                    return;
+                }
+                const formData = new URLSearchParams();
+                formData.append('email', emailValue);
+                fetch('newsletter-subscribe.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData.toString()
+                })
+                .then(response => response.text())
+                .then(data => {
+                    newsletterAlertHome.innerHTML = `<div class='alert alert-success'>${data}</div>`;
+                    newsletterFormHome.reset();
+                })
+                .catch(error => {
+                    newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
+                });
             });
         }
     });
