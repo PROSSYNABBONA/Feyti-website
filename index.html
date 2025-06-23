@@ -288,19 +288,12 @@
                 e.preventDefault();
                 newsletterAlertHome.innerHTML = '';
                 const emailInput = document.getElementById('newsletterEmailHome');
-                // Debug: show all form values
-                let debugMsg = 'Form values at submit:\n';
-                Array.from(newsletterFormHome.elements).forEach(el => {
-                    if (el.name) debugMsg += el.name + ': ' + el.value + '\n';
-                });
-                alert(debugMsg);
-                console.log('Newsletter email value (home):', emailInput.value); // Debug log
-                if (!emailInput.value) {
+                if (!emailInput.value.trim()) {
                     newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
                     return;
                 }
                 const formData = new URLSearchParams();
-                formData.append('email', emailInput.value);
+                formData.append('email', emailInput.value.trim());
                 fetch('newsletter-subscribe.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
