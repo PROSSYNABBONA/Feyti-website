@@ -11,7 +11,7 @@ require 'PHPMailer/src/SMTP.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Debug: log POST data
-    file_put_contents('newsletter_debug.log', print_r($_POST, true), FILE_APPEND);
+    // file_put_contents('newsletter_debug.log', print_r($_POST, true), FILE_APPEND);
     $subscriber = trim(isset($_POST['email']) ? $_POST['email'] : '');
     if ($subscriber && filter_var($subscriber, FILTER_VALIDATE_EMAIL)) {
         $mail = new PHPMailer(true);
