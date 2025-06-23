@@ -314,6 +314,10 @@
                     if(!emailValue && trackedEmailValue) {
                         emailValue = trackedEmailValue;
                     }
+                    // As a last resort, try reading from the form element
+                    if(!emailValue && newsletterFormHome.elements['email'] && newsletterFormHome.elements['email'].value) {
+                        emailValue = newsletterFormHome.elements['email'].value.trim();
+                    }
                     if(!emailValue) {
                         newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Please click or type in the email field to confirm your email address.</div>`;
                         if(emailInput) emailInput.focus();
