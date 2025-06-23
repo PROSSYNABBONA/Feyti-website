@@ -170,41 +170,55 @@
     <script src="script.js"></script>
     <script>
     // Newsletter subscription AJAX
+    // Robust autofill handling for email field
+    // See: https://bugs.chromium.org/p/chromium/issues/detail?id=587466
+    // and https://stackoverflow.com/a/65408733
+
     document.addEventListener('DOMContentLoaded', function() {
-        const newsletterForm = document.getElementById('newsletterForm');
-        const newsletterAlert = document.getElementById('newsletterAlert');
-        if(newsletterForm) {
-            newsletterForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                newsletterAlert.innerHTML = '';
-                let emailInput = document.getElementById('newsletterEmail');
-                // Focus and blur to trigger autofill if needed
-                if(emailInput) { emailInput.focus(); emailInput.blur(); }
-                setTimeout(function() {
-                    let emailValue = (newsletterForm.elements['email'] && newsletterForm.elements['email'].value) ? newsletterForm.elements['email'].value.trim() : (emailInput ? emailInput.value.trim() : '');
-                    if (!emailValue) {
-                        newsletterAlert.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
-                        return;
-                    }
-                    const formData = new URLSearchParams();
-                    formData.append('email', emailValue);
-                    fetch('newsletter-subscribe.php', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: formData.toString()
-                    })
-                    .then(response => response.text())
-                    .then(data => {
-                        newsletterAlert.innerHTML = `<div class='alert alert-success'>${data}</div>`;
-                        newsletterForm.reset();
-                    })
-                    .catch(error => {
-                        newsletterAlert.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
-                    });
-                }, 100);
+    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterAlert = document.getElementById('newsletterAlert');
+    let emailInput = document.getElementById('newsletterEmail');
+    let trackedEmailValue = '';
+    if(emailInput) {
+        // Track value on input, change, focus, blur
+        const updateTrackedValue = () => { trackedEmailValue = emailInput.value.trim(); };
+        emailInput.addEventListener('input', updateTrackedValue);
+        emailInput.addEventListener('change', updateTrackedValue);
+        emailInput.addEventListener('focus', updateTrackedValue);
+        emailInput.addEventListener('blur', updateTrackedValue);
+        // Try to grab autofill value after DOMContentLoaded
+        setTimeout(updateTrackedValue, 200);
+    }
+    if(newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            newsletterAlert.innerHTML = '';
+            // Always update tracked value before submit
+            if(emailInput) trackedEmailValue = emailInput.value.trim();
+            let emailValue = trackedEmailValue || (emailInput ? emailInput.value.trim() : '');
+            if (!emailValue) {
+                newsletterAlert.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
+                return;
+            }
+            const formData = new URLSearchParams();
+            formData.append('email', emailValue);
+            fetch('newsletter-subscribe.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData.toString()
+            })
+            .then(response => response.text())
+            .then(data => {
+                newsletterAlert.innerHTML = `<div class='alert alert-success'>${data}</div>`;
+                newsletterForm.reset();
+                trackedEmailValue = '';
+            })
+            .catch(error => {
+                newsletterAlert.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
             });
-        }
-    });
+        });
+    }
+});
     </script>
     <script>
     // Chat popup AJAX submission for this page
