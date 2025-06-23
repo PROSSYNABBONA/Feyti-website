@@ -216,6 +216,7 @@
                         <input type="email" class="form-control" id="newsletterEmailHome" name="email" placeholder="Email" required autocomplete="email">
                         <button class="btn btn-light" type="submit">Subscribe</button>
                     </div>
+                    <small class="form-text text-warning" id="newsletterEmailHomeHelp">If your email is autofilled, please click or type in the field before submitting.</small>
                     <div id="newsletterAlertHome" class="mt-2"></div>
                 </div>
             </form>
@@ -307,7 +308,7 @@
                 }
                 setTimeout(function() {
                     let emailValue = newsletterFormHome.elements['email'] && newsletterFormHome.elements['email'].value ? newsletterFormHome.elements['email'].value.trim() : '';
-                    if (!emailValue) {
+                    if(!emailValue) {
                         newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Please click or type in the email field to confirm your email address.</div>`;
                         if(emailInput) emailInput.focus();
                         return;
