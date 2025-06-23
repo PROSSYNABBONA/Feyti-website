@@ -177,7 +177,9 @@
             newsletterForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 newsletterAlert.innerHTML = '';
-                let emailValue = newsletterForm.elements['email'].value.trim();
+                // Try to get the value from both the input and the form, fallback to input if needed
+                let emailInput = document.getElementById('newsletterEmail');
+                let emailValue = (newsletterForm.elements['email'] && newsletterForm.elements['email'].value) ? newsletterForm.elements['email'].value.trim() : (emailInput ? emailInput.value.trim() : '');
                 if (!emailValue) {
                     newsletterAlert.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
                     return;
