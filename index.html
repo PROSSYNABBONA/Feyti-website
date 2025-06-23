@@ -303,11 +303,13 @@
             newsletterFormHome.addEventListener('submit', function(e) {
                 e.preventDefault();
                 newsletterAlertHome.innerHTML = '';
+                let emailValue = '';
                 if(emailInput) {
+                    // Always read directly from the input at submit time
+                    emailValue = emailInput.value.trim();
                     emailInput.dispatchEvent(new Event('change', { bubbles: true }));
                 }
                 setTimeout(function() {
-                    let emailValue = newsletterFormHome.elements['email'] && newsletterFormHome.elements['email'].value ? newsletterFormHome.elements['email'].value.trim() : '';
                     // Fallback to tracked value if main value is empty
                     if(!emailValue && trackedEmailValue) {
                         emailValue = trackedEmailValue;
@@ -328,6 +330,7 @@
                     .then(data => {
                         newsletterAlertHome.innerHTML = `<div class='alert alert-success'>${data}</div>`;
                         newsletterFormHome.reset();
+                        trackedEmailValue = '';
                     })
                     .catch(error => {
                         newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
