@@ -303,13 +303,13 @@
                 e.preventDefault();
                 newsletterAlertHome.innerHTML = '';
                 if(emailInput) {
-                    // Force autofill commit
                     emailInput.dispatchEvent(new Event('change', { bubbles: true }));
                 }
                 setTimeout(function() {
                     let emailValue = newsletterFormHome.elements['email'] && newsletterFormHome.elements['email'].value ? newsletterFormHome.elements['email'].value.trim() : '';
                     if (!emailValue) {
-                        newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
+                        newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Please click or type in the email field to confirm your email address.</div>`;
+                        if(emailInput) emailInput.focus();
                         return;
                     }
                     const formData = new URLSearchParams();
