@@ -300,6 +300,11 @@
             if(newsletterAlertHome) newsletterAlertHome.innerHTML = '<div class="alert alert-danger">Newsletter email input not found.</div>';
             return;
         }
+        // Force autofill value to be recognized by dispatching input event
+        setTimeout(() => {
+            emailInput.dispatchEvent(new Event('input', { bubbles: true }));
+        }, 500);
+
         newsletterFormHome.addEventListener('submit', function(e) {
             e.preventDefault();
             newsletterAlertHome.innerHTML = '';
@@ -308,11 +313,26 @@
             console.log('Input value:', emailValue, 'Form value:', formEmailValue);
             // Prefer the form value if available
             if(formEmailValue) emailValue = formEmailValue;
+            // If still empty, try to force a re-read after a short delay (for autofill edge cases)
             if(!emailValue) {
-                newsletterAlertHome.innerHTML = '<div class="alert alert-danger">Please enter your email address.</div>';
-                emailInput.focus();
+                setTimeout(() => {
+                    let delayedValue = emailInput.value.trim();
+                    let delayedFormValue = newsletterFormHome.elements['email'] ? newsletterFormHome.elements['email'].value.trim() : '';
+                    console.log('Delayed Input value:', delayedValue, 'Delayed Form value:', delayedFormValue);
+                    if(delayedFormValue) delayedValue = delayedFormValue;
+                    if(!delayedValue) {
+                        newsletterAlertHome.innerHTML = '<div class="alert alert-danger">Please enter your email address.</div>';
+                        emailInput.focus();
+                        return;
+                    }
+                    submitNewsletterEmail(delayedValue);
+                }, 100);
                 return;
             }
+            submitNewsletterEmail(emailValue);
+        });
+
+        function submitNewsletterEmail(emailValue) {
             const formData = new URLSearchParams();
             formData.append('email', emailValue);
             fetch('newsletter-subscribe.php', {
@@ -334,7 +354,7 @@
                 console.error('Newsletter AJAX error:', error);
                 newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
             });
-        });
+        }
     });
     // Chat popup AJAX submission for index page
     document.addEventListener('DOMContentLoaded', function() {
