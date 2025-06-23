@@ -308,6 +308,10 @@
                 }
                 setTimeout(function() {
                     let emailValue = newsletterFormHome.elements['email'] && newsletterFormHome.elements['email'].value ? newsletterFormHome.elements['email'].value.trim() : '';
+                    // Fallback to tracked value if main value is empty
+                    if(!emailValue && trackedEmailValue) {
+                        emailValue = trackedEmailValue;
+                    }
                     if(!emailValue) {
                         newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Please click or type in the email field to confirm your email address.</div>`;
                         if(emailInput) emailInput.focus();
