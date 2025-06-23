@@ -308,24 +308,35 @@
         newsletterFormHome.addEventListener('submit', function(e) {
             e.preventDefault();
             newsletterAlertHome.innerHTML = '';
+            // Force autofill value to commit by focusing and blurring the input
+            emailInput.focus();
+            emailInput.blur();
+            // Try to get value from input, form, and FormData
             let emailValue = emailInput.value.trim();
             let formEmailValue = newsletterFormHome.elements['email'] ? newsletterFormHome.elements['email'].value.trim() : '';
-            console.log('Input value:', emailValue, 'Form value:', formEmailValue);
-            // Prefer the form value if available
-            if(formEmailValue) emailValue = formEmailValue;
-            // If still empty, try to force a re-read after a short delay (for autofill edge cases)
+            // Try FormData as a last resort
+            let formDataObj = new FormData(newsletterFormHome);
+            let formDataEmail = formDataObj.get('email') ? formDataObj.get('email').trim() : '';
+            console.log('Input value:', emailValue, 'Form value:', formEmailValue, 'FormData value:', formDataEmail);
+            // Prefer the first non-empty value
+            emailValue = emailValue || formEmailValue || formDataEmail;
+            // If still empty, try a delayed re-read
             if(!emailValue) {
                 setTimeout(() => {
+                    emailInput.focus();
+                    emailInput.blur();
                     let delayedValue = emailInput.value.trim();
                     let delayedFormValue = newsletterFormHome.elements['email'] ? newsletterFormHome.elements['email'].value.trim() : '';
-                    console.log('Delayed Input value:', delayedValue, 'Delayed Form value:', delayedFormValue);
-                    if(delayedFormValue) delayedValue = delayedFormValue;
-                    if(!delayedValue) {
+                    let delayedFormDataObj = new FormData(newsletterFormHome);
+                    let delayedFormDataEmail = delayedFormDataObj.get('email') ? delayedFormDataObj.get('email').trim() : '';
+                    console.log('Delayed Input value:', delayedValue, 'Delayed Form value:', delayedFormValue, 'Delayed FormData value:', delayedFormDataEmail);
+                    let finalValue = delayedValue || delayedFormValue || delayedFormDataEmail;
+                    if(!finalValue) {
                         newsletterAlertHome.innerHTML = '<div class="alert alert-danger">Please enter your email address.</div>';
                         emailInput.focus();
                         return;
                     }
-                    submitNewsletterEmail(delayedValue);
+                    submitNewsletterEmail(finalValue);
                 }, 100);
                 return;
             }
