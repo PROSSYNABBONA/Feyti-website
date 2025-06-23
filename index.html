@@ -304,7 +304,10 @@
             e.preventDefault();
             newsletterAlertHome.innerHTML = '';
             let emailValue = emailInput.value.trim();
-            console.log('Submitting newsletter form with email:', emailValue);
+            let formEmailValue = newsletterFormHome.elements['email'] ? newsletterFormHome.elements['email'].value.trim() : '';
+            console.log('Input value:', emailValue, 'Form value:', formEmailValue);
+            // Prefer the form value if available
+            if(formEmailValue) emailValue = formEmailValue;
             if(!emailValue) {
                 newsletterAlertHome.innerHTML = '<div class="alert alert-danger">Please enter your email address.</div>';
                 emailInput.focus();
