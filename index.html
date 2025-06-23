@@ -286,54 +286,52 @@
     // and https://stackoverflow.com/a/65408733
 
     document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM fully loaded and parsed');
         const newsletterFormHome = document.getElementById('newsletterFormHome');
         const newsletterAlertHome = document.getElementById('newsletterAlertHome');
         let emailInput = document.getElementById('newsletterEmailHome');
-        let trackedEmailValue = '';
-        if(emailInput) {
-            // Track value on input, change, focus, blur
-            const updateTrackedValue = () => { trackedEmailValue = emailInput.value.trim(); };
-            emailInput.addEventListener('input', updateTrackedValue);
-            emailInput.addEventListener('change', updateTrackedValue);
-            emailInput.addEventListener('focus', updateTrackedValue);
-            emailInput.addEventListener('blur', updateTrackedValue);
-            setTimeout(updateTrackedValue, 200);
+        if(!newsletterFormHome) {
+            console.error('newsletterFormHome not found');
+            if(newsletterAlertHome) newsletterAlertHome.innerHTML = '<div class="alert alert-danger">Newsletter form not found on page.</div>';
+            return;
         }
-        if(newsletterFormHome) {
-            newsletterFormHome.addEventListener('submit', function(e) {
-                e.preventDefault();
-                newsletterAlertHome.innerHTML = '';
-                let emailValue = '';
-                if(emailInput) {
-                    emailValue = emailInput.value.trim();
+        if(!emailInput) {
+            console.error('newsletterEmailHome input not found');
+            if(newsletterAlertHome) newsletterAlertHome.innerHTML = '<div class="alert alert-danger">Newsletter email input not found.</div>';
+            return;
+        }
+        newsletterFormHome.addEventListener('submit', function(e) {
+            e.preventDefault();
+            newsletterAlertHome.innerHTML = '';
+            let emailValue = emailInput.value.trim();
+            console.log('Submitting newsletter form with email:', emailValue);
+            if(!emailValue) {
+                newsletterAlertHome.innerHTML = '<div class="alert alert-danger">Please enter your email address.</div>';
+                emailInput.focus();
+                return;
+            }
+            const formData = new URLSearchParams();
+            formData.append('email', emailValue);
+            fetch('newsletter-subscribe.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData.toString()
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Newsletter response:', data);
+                if(data && data.trim().length > 0) {
+                    newsletterAlertHome.innerHTML = `<div class='alert alert-success'>${data}</div>`;
+                } else {
+                    newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later. (No response from server)</div>`;
                 }
-                // Let browser handle required validation, just check again for safety
-                if(!emailValue) {
-                    // Browser will show its own required message
-                    return;
-                }
-                const formData = new URLSearchParams();
-                formData.append('email', emailValue);
-                fetch('newsletter-subscribe.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: formData.toString()
-                })
-                .then(response => response.text())
-                .then(data => {
-                    console.log('Newsletter response:', data);
-                    if(data && data.trim().length > 0) {
-                        newsletterAlertHome.innerHTML = `<div class='alert alert-success'>${data}</div>`;
-                    } else {
-                        newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later. (No response from server)</div>`;
-                    }
-                    newsletterFormHome.reset();
-                })
-                .catch(error => {
-                    newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
-                });
+                newsletterFormHome.reset();
+            })
+            .catch(error => {
+                console.error('Newsletter AJAX error:', error);
+                newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
             });
-        }
+        });
     });
     // Chat popup AJAX submission for index page
     document.addEventListener('DOMContentLoaded', function() {
