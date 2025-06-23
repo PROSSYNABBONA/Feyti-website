@@ -213,7 +213,7 @@
             <form id="newsletterFormHome" class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="input-group">
-                        <input type="email" class="form-control" id="newsletterEmailHome" name="email" placeholder="Email" required>
+                        <input type="email" class="form-control" id="newsletterEmailHome" name="email" placeholder="Email" required autocomplete="email">
                         <button class="btn btn-light" type="submit">Subscribe</button>
                     </div>
                     <div id="newsletterAlertHome" class="mt-2"></div>
@@ -288,12 +288,15 @@
                 e.preventDefault();
                 newsletterAlertHome.innerHTML = '';
                 const emailInput = document.getElementById('newsletterEmailHome');
-                if (!emailInput.value.trim()) {
+                // Force trim and re-check value, fallback to form value
+                emailInput.value = emailInput.value.trim();
+                let emailValue = emailInput.value || newsletterFormHome.elements['email'].value;
+                if (!emailValue) {
                     newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
                     return;
                 }
                 const formData = new URLSearchParams();
-                formData.append('email', emailInput.value.trim());
+                formData.append('email', emailValue);
                 fetch('newsletter-subscribe.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
