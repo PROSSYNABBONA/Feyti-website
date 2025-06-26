@@ -213,9 +213,10 @@
             <form id="newsletterFormHome" class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="input-group">
-                        <input type="email" class="form-control" id="newsletterEmailHome" name="email" placeholder="Email" required value="example@gmail.com">
+                        <input type="email" class="form-control" id="newsletterEmailHome" name="email" placeholder="Email" required autocomplete="email">
                         <button class="btn btn-light" type="submit">Subscribe</button>
                     </div>
+                    <small class="form-text text-warning" id="newsletterEmailHomeHelp">Enter your Email  and subscribe.</small>
                     <div id="newsletterAlertHome" class="mt-2"></div>
                 </div>
             </form>
@@ -230,7 +231,7 @@
                 <a href="https://x.com/feytigroup" class="me-2 text-white" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X" width="24"></a>
                 <a href="https://www.facebook.com/Feyti256" class="me-2 text-white" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" width="24"></a>
                 <a href="https://www.linkedin.com/company/feytimedicalgroup/" class="me-2 text-white" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" width="24"></a>
-                <a href="https://www.instagram.com/feytimedcialgroup/" class="me-2 text-white" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" width="24"></a>
+                <a href="https://www.instagram.com/feytimedicalgroup?igsh=YzljYTk1ODg3Zg==" class="me-2 text-white" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" width="24"></a>
                 <a href="https://www.youtube.com/@FeytiMedicalGroup/videos" class="text-white" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube" width="24"></a>
             </div>
             <p class="mb-1">&copy; Feyti Medical Group, All rights reserved</p>
@@ -280,40 +281,89 @@
     <script src="script.js"></script>
     <script>
     // Newsletter subscription AJAX for home page
+    // Robust autofill handling for email field
+    // See: https://bugs.chromium.org/p/chromium/issues/detail?id=587466
+    // and https://stackoverflow.com/a/65408733
+
     document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM fully loaded and parsed');
         const newsletterFormHome = document.getElementById('newsletterFormHome');
         const newsletterAlertHome = document.getElementById('newsletterAlertHome');
-        if(newsletterFormHome) {
-            newsletterFormHome.addEventListener('submit', function(e) {
-                e.preventDefault();
-                newsletterAlertHome.innerHTML = '';
-                const emailInput = document.getElementById('newsletterEmailHome');
-                // Debug: show all form values
-                let debugMsg = 'Form values at submit:\n';
-                Array.from(newsletterFormHome.elements).forEach(el => {
-                    if (el.name) debugMsg += el.name + ': ' + el.value + '\n';
-                });
-                alert(debugMsg);
-                console.log('Newsletter email value (home):', emailInput.value); // Debug log
-                if (!emailInput.value) {
-                    newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>Email field is empty (JS).</div>`;
-                    return;
-                }
-                const formData = new URLSearchParams();
-                formData.append('email', emailInput.value);
-                fetch('newsletter-subscribe.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: formData.toString()
-                })
-                .then(response => response.text())
-                .then(data => {
+        let emailInput = document.getElementById('newsletterEmailHome');
+        if(!newsletterFormHome) {
+            console.error('newsletterFormHome not found');
+            if(newsletterAlertHome) newsletterAlertHome.innerHTML = '<div class="alert alert-danger">Newsletter form not found on page.</div>';
+            return;
+        }
+        if(!emailInput) {
+            console.error('newsletterEmailHome input not found');
+            if(newsletterAlertHome) newsletterAlertHome.innerHTML = '<div class="alert alert-danger">Newsletter email input not found.</div>';
+            return;
+        }
+        // Force autofill value to be recognized by dispatching input event
+        setTimeout(() => {
+            emailInput.dispatchEvent(new Event('input', { bubbles: true }));
+        }, 500);
+
+        newsletterFormHome.addEventListener('submit', function(e) {
+            e.preventDefault();
+            newsletterAlertHome.innerHTML = '';
+            // Force autofill value to commit by focusing and blurring the input
+            emailInput.focus();
+            emailInput.blur();
+            // Try to get value from input, form, and FormData
+            let emailValue = emailInput.value.trim();
+            let formEmailValue = newsletterFormHome.elements['email'] ? newsletterFormHome.elements['email'].value.trim() : '';
+            // Try FormData as a last resort
+            let formDataObj = new FormData(newsletterFormHome);
+            let formDataEmail = formDataObj.get('email') ? formDataObj.get('email').trim() : '';
+            console.log('Input value:', emailValue, 'Form value:', formEmailValue, 'FormData value:', formDataEmail);
+            // Prefer the first non-empty value
+            emailValue = emailValue || formEmailValue || formDataEmail;
+            // If still empty, try a delayed re-read
+            if(!emailValue) {
+                setTimeout(() => {
+                    emailInput.focus();
+                    emailInput.blur();
+                    let delayedValue = emailInput.value.trim();
+                    let delayedFormValue = newsletterFormHome.elements['email'] ? newsletterFormHome.elements['email'].value.trim() : '';
+                    let delayedFormDataObj = new FormData(newsletterFormHome);
+                    let delayedFormDataEmail = delayedFormDataObj.get('email') ? delayedFormDataObj.get('email').trim() : '';
+                    console.log('Delayed Input value:', delayedValue, 'Delayed Form value:', delayedFormValue, 'Delayed FormData value:', delayedFormDataEmail);
+                    let finalValue = delayedValue || delayedFormValue || delayedFormDataEmail;
+                    if(!finalValue) {
+                        newsletterAlertHome.innerHTML = '<div class="alert alert-danger">Please enter your email address.</div>';
+                        emailInput.focus();
+                        return;
+                    }
+                    submitNewsletterEmail(finalValue);
+                }, 100);
+                return;
+            }
+            submitNewsletterEmail(emailValue);
+        });
+
+        function submitNewsletterEmail(emailValue) {
+            const formData = new URLSearchParams();
+            formData.append('email', emailValue);
+            fetch('newsletter-subscribe.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData.toString()
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Newsletter response:', data);
+                if(data && data.trim().length > 0) {
                     newsletterAlertHome.innerHTML = `<div class='alert alert-success'>${data}</div>`;
-                    newsletterFormHome.reset();
-                })
-                .catch(error => {
-                    newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
-                });
+                } else {
+                    newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later. (No response from server)</div>`;
+                }
+                newsletterFormHome.reset();
+            })
+            .catch(error => {
+                console.error('Newsletter AJAX error:', error);
+                newsletterAlertHome.innerHTML = `<div class='alert alert-danger'>There was an error. Please try again later.</div>`;
             });
         }
     });

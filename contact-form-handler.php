@@ -11,8 +11,6 @@ require 'PHPMailer/src/SMTP.php';
 
 // Simple contact form handler
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Debug: log POST data
-    file_put_contents(__DIR__ . '/debug.txt', print_r($_POST, true));
     $name = trim(isset($_POST['name']) ? $_POST['name'] : '');
     $email = trim(isset($_POST['email']) ? $_POST['email'] : '');
     $message = trim(isset($_POST['message']) ? $_POST['message'] : '');
