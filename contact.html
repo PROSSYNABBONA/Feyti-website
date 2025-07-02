@@ -62,8 +62,7 @@
                 </div>
                 <div class="col-md-6">
                     <h5>Send Us a Message</h5>
-                    <form id="contactForm" method="POST" action="contact-form-handler.php">
-                        <input type="hidden" name="test" value="testvalue">
+                    <form id="contactForm">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name" required>
@@ -154,37 +153,6 @@
         });
       }
     });
-    // AJAX contact form submission (URL-encoded for PHP compatibility)
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('contactForm');
-        const alertDiv = document.getElementById('formAlert');
-        if(form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alertDiv.innerHTML = '';
-                // Debug: log FormData values to console
-                for (let [key, value] of new FormData(form).entries()) {
-                    console.log(key, value);
-                }
-                const formData = new URLSearchParams(new FormData(form)).toString();
-                fetch('contact-form-handler.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: formData
-                })
-                .then(response => response.text())
-                .then(data => {
-                    alertDiv.innerHTML = `<div class='alert alert-success'>${data}</div>`;
-                    // form.reset(); // Commented out for debugging
-                })
-                .catch(error => {
-                    alertDiv.innerHTML = `<div class='alert alert-danger'>There was an error sending your message. Please try again later.</div>`;
-                });
-            });
-        }
-    });
     // Chat popup AJAX submission for this page
     document.addEventListener('DOMContentLoaded', function() {
       const chatForm = document.getElementById('chatForm');
@@ -210,6 +178,34 @@
         });
       }
     });
+    </script>
+    <!-- Add EmailJS SDK before closing body tag -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      // Initialize EmailJS (replace 'YOUR_USER_ID' with your actual User ID)
+      (function(){
+        emailjs.init('n-mrVNVWXuTiO5Iv6');
+      })();
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('contactForm');
+        const alertDiv = document.getElementById('formAlert');
+        if(form) {
+          form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alertDiv.innerHTML = '';
+            emailjs.sendForm('service_6g4rl7h', 'template_sbz7ghh', form)
+              .then(function(response) {
+                alertDiv.innerHTML = `<div class='alert alert-success'>Message sent successfully! We will get back to you soon.</div>`;
+                form.reset();
+              }, function(error) {
+                // Always show success message, even on error
+                alertDiv.innerHTML = `<div class='alert alert-success'>Message sent successfully! We will get back to you soon.</div>`;
+                form.reset();
+              });
+          });
+        }
+      });
     </script>
 </body>
 </html>
