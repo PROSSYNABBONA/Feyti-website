@@ -1,7 +1,0 @@
-Array
-(
-    [test] => testvalue
-    [name] => Prooy
-    [email] => prossienabbona222@gmail.com
-    [message] => Do you offer medical writing?
-)
